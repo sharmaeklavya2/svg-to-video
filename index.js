@@ -3,6 +3,8 @@ let child_process = require('child_process');
 let puppeteer = require("puppeteer");
 
 const usage = 'usage: node index.js <svgPath> <duration> <fps> <outDir>';
+const imgExtention = 'png';
+const imgType = 'png';
 
 async function main() {
     let [nodePath, progPath, svgPath, duration, fps, outDir] = process.argv;
@@ -38,9 +40,8 @@ async function createFrames(svg, fps, totalFrames, digits) {
     await page.setContent(svg);
 
     let renderSettings = {
-        type: 'jpeg',
-        omitBackground: true,
-        quality: 100,
+        type: imgType,
+        omitBackground: false,
     };
 
     console.log('creating frames');
@@ -52,7 +53,7 @@ async function createFrames(svg, fps, totalFrames, digits) {
 
         let outputElem = await page.$('svg');
         let prefix = ('' + i).padStart(digits, '0');
-        renderSettings.path = prefix + '.jpg';
+        renderSettings.path = prefix + '.' + imgExtention;
         await outputElem.screenshot(renderSettings);
         if(i % fps === 0 || i === totalFrames) {
             console.log('progress: ' + prefix + ' / ' + totalFrames);
@@ -64,11 +65,12 @@ async function createFrames(svg, fps, totalFrames, digits) {
 }
 
 function convertToMP4(fps, totalFrames, digits) {
+    console.log('running ffmpeg')
     let output = child_process.execFileSync('ffmpeg',
         ['-hide_banner', '-loglevel', 'warning', '-y',
             '-framerate', '' + fps,
-            '-i', '%0' + digits + 'd.jpg',
-            '-c:v', 'libx264', '-vf', 'fps=' + fps,
+            '-i', '%0' + digits + 'd.' + imgExtention,
+            '-c:v', 'libx264', '-vf', 'fps=' + fps, '-pix_fmt', 'yuv420p',
             'output.mp4'],
         {'encoding': 'utf8'});
     console.log(output);
