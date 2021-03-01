@@ -48,7 +48,7 @@ async function createFrames(svg, fps, totalFrames, digits) {
     for(let i=1; i <= totalFrames; ++i) {
         let result = await page.evaluate(function(startVal) {
             document.getElementsByTagName('svg')[0].style.setProperty('--start', startVal);},
-            '' + (i / fps) + 's');
+            '' + ((i-1) / fps) + 's');
         await page.waitForTimeout(1);
 
         let outputElem = await page.$('svg');
