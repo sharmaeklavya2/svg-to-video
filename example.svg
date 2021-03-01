@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+width="768" height="640" viewBox="-1 -1 12 10">
+<style>
+svg {
+    --start: 0s;
+    --play-state: running;
+}
+@media (prefers-color-scheme: dark) {
+    svg {background: hsl(0, 0%, 12%);}
+}
+rect {
+    stroke-width: 0.05;
+    stroke: hsl(0, 0%, 50%);
+    fill: none;
+}
+circle {
+    fill: hsl(0, 70%, 50%);
+    animation-duration: 2s, 2.5s;
+    animation-name: vbounce, hbounce;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-play-state: var(--play-state);
+}
+@keyframes vbounce {
+    0% {cy: 1;}
+    43.75% {cy: 8;}
+    93.75% {cy: 0;}
+    100% {cy: 1;}
+}
+@keyframes hbounce {
+    0% {cx: 0;}
+    50% {cx: 10;}
+    100% {cx: 0;}
+}
+</style>
+<!--<rect x="0" y="0" width="10" height="8" style="stroke: gray;"/>-->
+<rect x="-1" y="-1" width="12" height="10"/>
+<circle cx="0" cy="1" r="1" style="opacity: 20%; animation-delay: calc(0.4s - 20s - var(--start))"/>
+<circle cx="0" cy="1" r="1" style="opacity: 40%; animation-delay: calc(0.3s - 20s - var(--start));"/>
+<circle cx="0" cy="1" r="1" style="opacity: 60%; animation-delay: calc(0.2s - 20s - var(--start));"/>
+<circle cx="0" cy="1" r="1" style="opacity: 80%; animation-delay: calc(0.1s - 20s - var(--start));"/>
+<circle cx="0" cy="1" r="1" style="animation-delay: calc(0s - 20s - var(--start))"/>
+</svg>

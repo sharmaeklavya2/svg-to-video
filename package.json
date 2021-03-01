@@ -1,0 +1,24 @@
+{
+  "name": "svg-to-video",
+  "version": "0.1",
+  "description": "Command-line tool for converting a CSS-animated SVG to MP4 video.",
+  "author": "Eklavya Sharma",
+  "keywords": [
+    "svg",
+    "export",
+    "convert",
+    "converter",
+    "rasterize",
+    "jpeg",
+    "jpg",
+    "mp4"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^8.0.0"
+  },
+  "main": "index.js",
+  "bin": {
+    "svgexport": "bin/index.js"
+  }
+}

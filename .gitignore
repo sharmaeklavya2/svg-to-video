@@ -1,0 +1,10 @@
+/node_modules
+/secret
+/output
+/out-dir
+
+*~
+*.sw[po]
+Thumbs.db
+Desktop.ini
+.DS_Store
